@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import FetchModule from './controllers/FetchModule.js';
 
 function App() {
   const [data, setData] = useState();
