@@ -1,16 +1,12 @@
 async function fetchData(city) {
-  let url = new URL(
-    `https://api.tomorrow.io/v4/weather/forecast?location=${city.toLowerCase()}&apikey=${
-      process.env.TOMORROW_API_KEY
-    }`,
-    location.origin
-  );
+  const apiKey = process.env.REACT_APP_API_KEY;
+  let url = `https://api.tomorrow.io/v4/weather/forecast?location=${city.toLowerCase()}&apikey=${apiKey}`;
   let data;
   try {
     let response = await fetch(url);
     if (response.ok) {
-      let allData = await response.json();
-      
+      data = await response.json();
+
     } else {
       data = null;
     }
