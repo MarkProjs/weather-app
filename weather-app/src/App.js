@@ -1,22 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import fetchData from "./controllers/FetchModule";
+import SearchBar from "./components/SearchBar";
+
 function App() {
-  const [data, setData] = useState();
-  const [searchInput, setSearchInput] = useState("");
+  const [searchResult, setSearchResult] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      setData(await fetchData("montreal"));
-    })();
-  }, []);
+  async function handleSearch(query) {
+    setSearchResult(await fetchData(query));
+    console.log(`Performing search for: ${query}`);
+  }
 
-
-
-  return <div className="App">
-    <p>{data}</p>
-
-
-  </div>;
+  return (
+    <div className="App">
+      <div>
+          {searchResult !== null ? (
+            <p>{searchResult}</p>
+          ) : (
+            <p>No results found</p>
+          )}
+        </div>
+    </div>
+  );
 }
 
 export default App;
