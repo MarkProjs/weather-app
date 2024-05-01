@@ -13,6 +13,8 @@ function App() {
   return (
     <div className="App">
       <div>
+      <h1>Search Example</h1>
+        <SearchBar onSearch={handleSearch} />
           {searchResult !== null ? (
             <p>{searchResult}</p>
           ) : (
