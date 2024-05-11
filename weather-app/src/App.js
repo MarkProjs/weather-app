@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 
 function App() {
   const [city, setCity] = useState("");
@@ -22,29 +22,35 @@ function App() {
     }
   }
 
-  useEffect(()=> {
-    if (city) {
-      fetchWeatherData();   
-    }
-  }, [city]);
-
   function handleCityChange(evt) {
     setCity(evt.target.value);
   }
-  return <div className="App">
-    <input type="text" value={city} placeholder="Search..." onChange={handleCityChange}/>
+
+  function handleSearch() {
+    fetchWeatherData();
+  }
+
+  return (
+    <div className="App">
+      <input
+        type="text"
+        value={city}
+        placeholder="Search..."
+        onChange={handleCityChange}
+      />
+      <button onClick={handleSearch}>Search</button>
       {isLoading ? (
         <p>Loading...</p>
       ) : data ? (
         <div>
-          <h2>Weather in {city}</h2>
-          <p>{/* Display weather data here */}</p>
+          <p>Temperature in {city}: {data.data[0].app_temp} C</p>
+          <p>Description: {data.data[0].weather.description}</p>
         </div>
       ) : (
-        <p>Please enter a city</p>
+        <p>No weather data available</p>
       )}
-
-  </div>;
+    </div>
+  );
 }
 
 export default App;
