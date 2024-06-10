@@ -1,53 +1,83 @@
-import { useState, } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [city, setCity] = useState("");
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [dataName, setDataName] = useState("");
   const [temp, setTemp] = useState(0.0);
   const [desc, setDesc] = useState("");
+  const [iconURL, setIconURL] = useState("");
 
-  async function fetchWeatherData() {
-    try {
-      setIsLoading(true);
-      const resp = await fetch(
-        `https://api.weatherbit.io/v2.0/current?city=${city}&key=${process.env.REACT_APP_API_KEY}`
-      );
-      const weatherData = await resp.json();
-      setData(weatherData);
-    } catch (error) {
-      console.error("Error fetching weather data:", error);
-    } finally {
-      setIsLoading(false);
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+      });
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    const fetchWeatherData = async ({ city, lat, lon }) => {
+      try {
+        let url;
+        if (city) {
+          url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}`;
+        } else if (lat && lon) {
+          url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_API_KEY}`;
+        } else {
+          throw new Error("Either city or latitude and longitude must be provided");
+        }
+
+        const resp = await fetch(url);
+        const data = await resp.json();
+        if (resp.ok) {
+          let realTemp = Math.round(data.main.temp - 273.15);
+          let iconCode = data.weather[0].icon;
+          setDataName(data.name);
+          setTemp(realTemp);
+          setDesc(data.weather[0].description);
+          setIconURL(`http://openweathermap.org/img/wn/${iconCode}@2x.png`);
+        } else {
+          throw new Error(data.message || "Error fetching weather data");
+        }
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      }
+    };
+
+    if (city) {
+      fetchWeatherData({ city });
+    } else if (location.latitude && location.longitude) {
+      fetchWeatherData({ lat: location.latitude, lon: location.longitude });
+    }
+  }, [location, city]);
 
   function handleCityChange(evt) {
     setCity(evt.target.value);
   }
 
-  function handleSearch() {
-    fetchWeatherData();
-  }
-
   return (
     <div className="App">
+      <h1>Weather App</h1>
       <input
         type="text"
         value={city}
-        placeholder="Search..."
+        placeholder="Search your city..."
         onChange={handleCityChange}
       />
-      <button onClick={handleSearch}>Search</button>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : data ? (
+      {dataName ? (
         <div>
-          <p>Temperature in {city}: {data.data[0].app_temp} C</p>
-          <p>Description: {data.data[0].weather.description}</p>
+          <h2>{dataName}</h2>
+          <img src={iconURL} alt="weather-icon" />
+          <p>Temperature: {temp} °C</p>
+          <p>Description: {desc}</p>
+          <p>Data provided by OpenWeatherMap ＜（＾－＾）＞</p>
         </div>
       ) : (
-        <p>No weather data available</p>
+        <p>There is an error! We will get back to you! (っ °Д °;)っ</p>
       )}
     </div>
   );
