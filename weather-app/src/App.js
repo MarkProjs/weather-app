@@ -5,6 +5,7 @@ function App() {
   const [city, setCity] = useState("");
   const [dataName, setDataName] = useState("");
   const [temp, setTemp] = useState(0.0);
+  const [feelsLike, setFeelsLike] = useState(0.0);
   const [desc, setDesc] = useState("");
   const [iconURL, setIconURL] = useState("");
 
@@ -38,6 +39,7 @@ function App() {
           let iconCode = data.weather[0].icon;
           setDataName(data.name);
           setTemp(realTemp);
+          setFeelsLike(Math.round(data.main.feels_like - 273.15));
           setDesc(data.weather[0].description);
           setIconURL(`http://openweathermap.org/img/wn/${iconCode}@2x.png`);
         } else {
@@ -73,6 +75,7 @@ function App() {
           <h2>{dataName}</h2>
           <img src={iconURL} alt="weather-icon" />
           <p>Temperature: {temp} °C</p>
+          <p>Feels like: {feelsLike} °C</p>
           <p>Description: {desc}</p>
           <p>Data provided by OpenWeatherMap ＜（＾－＾）＞</p>
         </div>
