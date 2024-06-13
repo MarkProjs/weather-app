@@ -1,10 +1,31 @@
 body {
-  margin: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url('/public/cloudy.jpg');
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+  .background {
+      background-size: contain; /* Contain the image within the container */
+  }
+}
+
+/* For screens smaller than 480px */
+@media (max-width: 480px) {
+  .background {
+      background-size: 100% auto; /* Adjust size to fit width */
+  }
 }
 
 code {
