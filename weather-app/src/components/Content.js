@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
+import "../assets/css/content.css";
 
-export default function Content() {
+export default function Content(props) {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [city, setCity] = useState("");
   const [dataName, setDataName] = useState("Montreal");
   const [temp, setTemp] = useState(0.0);
   const [feelsLike, setFeelsLike] = useState(0.0);
-  const [desc, setDesc] = useState("");
   const [iconURL, setIconURL] = useState("");
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Content() {
           setDataName(data.name);
           setTemp(Math.round(data.main.temp - 273.15));
           setFeelsLike(Math.round(data.main.feels_like - 273.15));
-          setDesc(data.weather[0].description);
+          props.setDesc(data.weather[0].description);
           setIconURL(
             `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
           );
@@ -61,14 +61,14 @@ export default function Content() {
   }, [location, city]);
 
   return (
-    <div className="content">
+    <div className="Content">
       <h1>Weather App</h1>
       <SearchBar city={city} setCity={setCity} />
       {dataName ? (
-        <div className="content">
+        <div className="main-content">
           <h2>{dataName}</h2>
           <img src={iconURL} alt="weather-icon" />
-          <p id="desc">{desc}</p>
+          <p id="desc">{props.desc}</p>
           <div className="temp">
             <p>Temp: {temp} °C</p>
             <p>Feels like: {feelsLike} °C</p>

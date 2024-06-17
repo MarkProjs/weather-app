@@ -1,12 +1,4 @@
 body {
-  width: 100%;
-  height: 100vh;
-  background-image: url('/public/cloudy.jpg');
-  background-size: cover; /* Cover the entire container */
-  background-position: center; /* Center the image */
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

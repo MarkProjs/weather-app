@@ -1,0 +1,41 @@
+.Content {
+  height: 48em;
+  width: 50em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: auto;
+  text-align: center;
+  border-radius: 1em;
+}
+
+h1 {
+  font-size: 5em;
+}
+h2 {
+  font-size: 3em;
+}
+
+.main-content img {
+  height: 8em;
+  width: 8em;
+}
+
+#desc {
+  font-size: 2em;
+}
+
+.temp {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+p {
+  font-weight: bolder;
+}
+
+#credits {
+  font-style: italic;
+  padding-top: 4em;
+}
