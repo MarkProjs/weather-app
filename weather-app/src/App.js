@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import Content from "./components/Content";
 
 function App() {
-  const [location, setLocation] = useState({ latitude: null, longitude: null });
-  const [city, setCity] = useState("");
-  const [dataName, setDataName] = useState("Montreal");
-  const [temp, setTemp] = useState(0.0);
-  const [feelsLike, setFeelsLike] = useState(0.0);
-  const [desc, setDesc] = useState("");
-  const [iconURL, setIconURL] = useState("");
+  // const [location, setLocation] = useState({ latitude: null, longitude: null });
+  // const [city, setCity] = useState("");
+  // const [dataName, setDataName] = useState("Montreal");
+  // const [temp, setTemp] = useState(0.0);
+  // const [feelsLike, setFeelsLike] = useState(0.0);
+  // const [desc, setDesc] = useState("");
+  // const [iconURL, setIconURL] = useState("");
 
   // useEffect(() => {
   //   if (navigator.geolocation) {
@@ -56,33 +57,26 @@ function App() {
   //   }
   // }, [location, city]);
 
-  function handleCityChange(evt) {
-    setCity(evt.target.value);
-  }
-
+  
   return (
     <div className="App">
-      <h1>Weather App</h1>
-      <input
-        type="text"
-        value={city}
-        placeholder="Search your city..."
-        onChange={handleCityChange}
-      />
+      {/* <h1>Weather App</h1>
+      <SearchBar city={city} setCity={setCity}/>
       {dataName ? (
         <div className="content">
-          <h2>Montreal</h2>
-          <img src="/11d@2x.png" alt="weather-icon" />
-          <p id="desc">Thunderstorm</p>
+          <h2>{dataName}</h2>
+          <img src={iconURL} alt="weather-icon" />
+          <p id="desc">{desc}</p>
           <div className="temp">
-            <p>Temp: 30 °C</p>
-            <p>Feels like: 20 °C</p>
+            <p>Temp: {temp} °C</p>
+            <p>Feels like: {feelsLike} °C</p>
           </div>
           <p id="credits">Data provided by OpenWeatherMap ＜（＾－＾）＞</p>
         </div>
       ) : (
         <p>There is an error! We will get back to you! (っ °Д °;)っ</p>
-      )}
+      )} */}
+      <Content />
     </div>
   );
 }
