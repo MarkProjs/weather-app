@@ -1,12 +1,41 @@
 .App {
-  width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 
+.clear {
+  background-image: url('./assets/images/clear.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.clouds {
+  background-image: url('./assets/images/clouds.webp');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.rain {
+  background-image: url('./assets/images/rain.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.snow {
+  background-image: url('./assets/images/snow.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.mist {
+  background-image: url('./assets/images/mist.webp');
+  background-size: cover;
+  background-position: center;
+}
 
 
 

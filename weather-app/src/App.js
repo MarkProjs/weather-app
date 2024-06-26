@@ -21,16 +21,9 @@ function App() {
       }
     }
     changeBackGround();
-  }, [desc]);
+  }, [desc, weatherCondition]);
   return (
-    <div
-      className="App"
-      style={{
-        backgroundImage: `url('./assets/images/${weatherCondition}.jpeg')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <div className={`${weatherCondition}`}>
       <Content desc={desc} setDesc={setDesc} />
     </div>
   );
