@@ -1,41 +1,52 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .App {
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.clear, .clouds, .rain, .snow, .mist {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
 
 .clear {
   background-image: url('./assets/images/clear.webp');
-  background-size: cover;
-  background-position: center;
 }
 
 .clouds {
   background-image: url('./assets/images/clouds.webp');
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 100%;
 }
 
 .rain {
   background-image: url('./assets/images/rain.webp');
-  background-size: cover;
-  background-position: center;
 }
 
 .snow {
   background-image: url('./assets/images/snow.webp');
-  background-size: cover;
-  background-position: center;
 }
 
 .mist {
   background-image: url('./assets/images/mist.webp');
-  background-size: cover;
-  background-position: center;
 }
-
-
-
